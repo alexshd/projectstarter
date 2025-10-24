@@ -34,9 +34,26 @@ var startGoCmd = &cobra.Command{
 	RunE: runStartGo,
 }
 
+var startViteElmCmd = &cobra.Command{
+	Use:   "vite-elm <project-name>",
+	Short: "Create a new Vite + Elm + Tailwind project",
+	Long: `Create a new Vite + Elm + Tailwind CSS project with:
+  - Vite build setup
+  - Elm with hot reload (vite-plugin-elm-watch)
+  - Tailwind CSS with @tailwindcss/vite plugin
+  - elm-tooling for tool management
+  - Working counter example
+  - package.json with dev, build, test scripts`,
+	Example: `  # Create new Vite + Elm project
+  proj start vite-elm myapp`,
+	Args: cobra.ExactArgs(1),
+	RunE: runStartViteElm,
+}
+
 func init() {
 	rootCmd.AddCommand(startCmd)
 	startCmd.AddCommand(startGoCmd)
+	startCmd.AddCommand(startViteElmCmd)
 }
 
 func runStartGo(cmd *cobra.Command, args []string) error {
@@ -53,6 +70,24 @@ func runStartGo(cmd *cobra.Command, args []string) error {
 	slog.Info("Next steps:",
 		"cd", projectName,
 		"run", "go mod tidy && go run cmd/"+projectName+"/main.go")
+
+	return nil
+}
+
+func runStartViteElm(cmd *cobra.Command, args []string) error {
+	projectName := args[0]
+
+	slog.Info("Creating Vite + Elm + Tailwind project", "name", projectName)
+
+	gen := generator.NewViteElmGenerator()
+	if err := gen.Generate(projectName); err != nil {
+		return fmt.Errorf("failed to generate project: %w", err)
+	}
+
+	slog.Info("✅ Project created successfully!", "name", projectName)
+	slog.Info("Next steps:",
+		"cd", projectName,
+		"run", "npm install && npm run dev")
 
 	return nil
 }
