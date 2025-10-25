@@ -7,7 +7,7 @@ import (
 )
 
 // Version of the application - update this manually when tagging a release
-var Version = "0.3.0"
+var Version = "0.3.1"
 
 var rootCmd = &cobra.Command{
 	Use:     "proj",
