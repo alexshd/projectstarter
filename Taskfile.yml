@@ -4,6 +4,7 @@ version: "3"
 
 tasks:
   default:
+    desc: Tests for lazy me
     deps:
       - test
     silent: true
@@ -12,4 +13,19 @@ tasks:
     desc: Run all tests
     aliases: [t]
     cmds:
-      - go test ./... -cover
+      - gotest ./... -cover
+    silent: true
+
+  build:
+    desc: Build the `proj`
+    deps: [test]
+    aliases: [b]
+    cmds:
+      - go build -v -o proj ./cmd/proj
+    silent: true
+
+  clean:
+    desc: Clean ... for cleaning
+    cmds:
+      - rm -rf ./proj
+    silent: true

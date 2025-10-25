@@ -2,6 +2,8 @@
 
 Quick Go project scaffolding tool.
 
+> This is personal preferences and has no intention to be universal or create projects and setups that I don't use.
+
 ## Installation
 
 ```bash
