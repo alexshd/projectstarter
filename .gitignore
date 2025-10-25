@@ -1,5 +1,5 @@
 # Binaries
-proj
+/proj
 *.exe
 *.exe~
 *.dll
