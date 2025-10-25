@@ -101,7 +101,7 @@ func TestViteElmGenerator_Generate(t *testing.T) {
 
 func TestViteElmGenerator_PackageJson(t *testing.T) {
 	gen := NewViteElmGenerator()
-	content := gen.packageJsonTemplate("my-app")
+	content := gen.packageJSONTemplate("my-app")
 
 	// Verify it's valid JSON
 	var pkg map[string]interface{}
@@ -192,7 +192,7 @@ func TestViteElmGenerator_ViteConfig(t *testing.T) {
 
 func TestViteElmGenerator_StyleCss(t *testing.T) {
 	gen := NewViteElmGenerator()
-	content := gen.styleCssTemplate()
+	content := gen.styleCSSTemplate()
 
 	t.Run("imports tailwindcss", func(t *testing.T) {
 		if !strings.Contains(content, `@import "tailwindcss"`) {
@@ -203,7 +203,7 @@ func TestViteElmGenerator_StyleCss(t *testing.T) {
 
 func TestViteElmGenerator_IndexHtml(t *testing.T) {
 	gen := NewViteElmGenerator()
-	content := gen.indexHtmlTemplate("Test App")
+	content := gen.indexHTMLTemplate("Test App")
 
 	t.Run("has correct title", func(t *testing.T) {
 		if !strings.Contains(content, "<title>Test App</title>") {
@@ -235,13 +235,13 @@ func TestViteElmGenerator_MainJs(t *testing.T) {
 	})
 
 	t.Run("imports Elm Main module", func(t *testing.T) {
-		if !strings.Contains(content, "import { Elm } from './Main.elm'") {
+		if !strings.Contains(content, "import Main from './Main.elm'") {
 			t.Error("main.js doesn't import Main.elm")
 		}
 	})
 
 	t.Run("initializes Elm app", func(t *testing.T) {
-		if !strings.Contains(content, "Elm.Main.init") {
+		if !strings.Contains(content, "Main.init") {
 			t.Error("main.js doesn't initialize Elm app")
 		}
 	})
@@ -290,19 +290,19 @@ func TestViteElmGenerator_ElmJson(t *testing.T) {
 	content := gen.elmJSONTemplate()
 
 	// Verify it's valid JSON
-	var elmJson map[string]interface{}
-	if err := json.Unmarshal([]byte(content), &elmJson); err != nil {
+	var elmJSON map[string]interface{}
+	if err := json.Unmarshal([]byte(content), &elmJSON); err != nil {
 		t.Fatalf("elmJSONTemplate() produced invalid JSON: %v", err)
 	}
 
 	t.Run("is application type", func(t *testing.T) {
-		if elmJson["type"] != "application" {
-			t.Errorf("Expected type 'application', got '%v'", elmJson["type"])
+		if elmJSON["type"] != "application" {
+			t.Errorf("Expected type 'application', got '%v'", elmJSON["type"])
 		}
 	})
 
 	t.Run("has src directory", func(t *testing.T) {
-		dirs, ok := elmJson["source-directories"].([]interface{})
+		dirs, ok := elmJSON["source-directories"].([]interface{})
 		if !ok || len(dirs) == 0 {
 			t.Fatal("source-directories not properly configured")
 		}
@@ -312,7 +312,7 @@ func TestViteElmGenerator_ElmJson(t *testing.T) {
 	})
 
 	t.Run("has browser dependencies", func(t *testing.T) {
-		deps := elmJson["dependencies"].(map[string]interface{})
+		deps := elmJSON["dependencies"].(map[string]interface{})
 		direct := deps["direct"].(map[string]interface{})
 
 		requiredDeps := []string{"elm/browser", "elm/core", "elm/html"}
@@ -326,7 +326,7 @@ func TestViteElmGenerator_ElmJson(t *testing.T) {
 
 func TestViteElmGenerator_ElmToolingJson(t *testing.T) {
 	gen := NewViteElmGenerator()
-	content := gen.elmToolingJsonTemplate()
+	content := gen.elmToolingJSONTemplate()
 
 	// Verify it's valid JSON
 	var tooling map[string]interface{}

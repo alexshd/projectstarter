@@ -1,0 +1,15 @@
+# https://taskfile.dev
+
+version: "3"
+
+tasks:
+  default:
+    deps:
+      - test
+    silent: true
+
+  test:
+    desc: Run all tests
+    aliases: [t]
+    cmds:
+      - go test ./... -cover

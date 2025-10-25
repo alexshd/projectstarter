@@ -5,6 +5,7 @@ import (
 	"log/slog"
 
 	"github.com/alexshd/projectstarter/internal/generator"
+	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 )
 
@@ -66,10 +67,13 @@ func runStartGo(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("failed to generate project: %w", err)
 	}
 
-	slog.Info("✅ Project created successfully!", "name", projectName)
-	slog.Info("Next steps:",
-		"cd", projectName,
-		"run", "go mod tidy && go run cmd/"+projectName+"/main.go")
+	fmt.Println()
+	color.Green("🐹 Go project created successfully!")
+	fmt.Println()
+	color.Cyan("🚀 Next steps:")
+	color.Yellow("   cd %s", projectName)
+	color.Yellow("   go mod tidy && go run cmd/%s/main.go", projectName)
+	fmt.Println()
 
 	return nil
 }
@@ -84,10 +88,13 @@ func runStartViteElm(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("failed to generate project: %w", err)
 	}
 
-	slog.Info("✅ Project created successfully!", "name", projectName)
-	slog.Info("Next steps:",
-		"cd", projectName,
-		"run", "npm install && npm run dev")
+	fmt.Println()
+	color.Green("🌳 Elm project created successfully!")
+	fmt.Println()
+	color.Cyan("⚡ Next steps:")
+	color.Yellow("   cd %s", projectName)
+	color.Yellow("   npm install && npm run dev")
+	fmt.Println()
 
 	return nil
 }

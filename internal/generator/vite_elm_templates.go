@@ -2,7 +2,7 @@ package generator
 
 import "fmt"
 
-func (g *ViteElmGenerator) packageJsonTemplate(projectName string) string {
+func (g *ViteElmGenerator) packageJSONTemplate(projectName string) string {
 	return fmt.Sprintf(`{
   "name": "%s",
   "version": "1.0.0",
@@ -38,7 +38,7 @@ export default defineConfig({
 `
 }
 
-func (g *ViteElmGenerator) indexHtmlTemplate(projectName string) string {
+func (g *ViteElmGenerator) indexHTMLTemplate(projectName string) string {
 	return fmt.Sprintf(`<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,7 +56,7 @@ func (g *ViteElmGenerator) indexHtmlTemplate(projectName string) string {
 
 func (g *ViteElmGenerator) mainJsTemplate() string {
 	return `import './style.css'
-import  Main  from './Main.elm'
+import Main from './Main.elm'
 
 Main.init({
   node: document.getElementById('app')
@@ -64,7 +64,7 @@ Main.init({
 `
 }
 
-func (g *ViteElmGenerator) styleCssTemplate() string {
+func (g *ViteElmGenerator) styleCSSTemplate() string {
 	return `@import "tailwindcss";
 
 body {
@@ -187,7 +187,7 @@ func (g *ViteElmGenerator) elmJSONTemplate() string {
 `
 }
 
-func (g *ViteElmGenerator) elmToolingJsonTemplate() string {
+func (g *ViteElmGenerator) elmToolingJSONTemplate() string {
 	return `{
   "tools": {
     "elm": "0.19.1",

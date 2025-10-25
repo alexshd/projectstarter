@@ -44,14 +44,14 @@ func (g *ViteElmGenerator) createStructure(projectName string) error {
 
 	// Create files
 	files := map[string]string{
-		filepath.Join(projectName, "package.json"):     g.packageJsonTemplate(projectName),
+		filepath.Join(projectName, "package.json"):     g.packageJSONTemplate(projectName),
 		filepath.Join(projectName, "vite.config.js"):   g.viteConfigTemplate(),
-		filepath.Join(projectName, "index.html"):       g.indexHtmlTemplate(projectName),
+		filepath.Join(projectName, "index.html"):       g.indexHTMLTemplate(projectName),
 		filepath.Join(projectName, "src", "main.js"):   g.mainJsTemplate(),
-		filepath.Join(projectName, "src", "style.css"): g.styleCssTemplate(),
+		filepath.Join(projectName, "src", "style.css"): g.styleCSSTemplate(),
 		filepath.Join(projectName, "src", "Main.elm"):  g.mainElmTemplate(),
 		filepath.Join(projectName, "elm.json"):         g.elmJSONTemplate(),
-		filepath.Join(projectName, "elm-tooling.json"): g.elmToolingJsonTemplate(),
+		filepath.Join(projectName, "elm-tooling.json"): g.elmToolingJSONTemplate(),
 		filepath.Join(projectName, ".gitignore"):       g.gitignoreTemplate(),
 		filepath.Join(projectName, "README.md"):        g.readmeTemplate(projectName),
 	}
