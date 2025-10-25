@@ -56,9 +56,9 @@ func (g *ViteElmGenerator) indexHtmlTemplate(projectName string) string {
 
 func (g *ViteElmGenerator) mainJsTemplate() string {
 	return `import './style.css'
-import { Elm } from './Main.elm'
+import  Main  from './Main.elm'
 
-Elm.Main.init({
+Main.init({
   node: document.getElementById('app')
 })
 `
