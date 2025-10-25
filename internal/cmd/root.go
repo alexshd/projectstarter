@@ -6,8 +6,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// Version is set via -ldflags at build time
-var Version = "dev"
+// Version of the application - update this manually when tagging a release
+var Version = "0.3.0"
 
 var rootCmd = &cobra.Command{
 	Use:     "proj",
